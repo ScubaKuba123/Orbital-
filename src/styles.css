@@ -1,0 +1,848 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Noto+Serif+JP:wght@300;400&family=Space+Mono&display=swap");
+:root {
+  font-family: "Noto Serif JP", serif;
+  color: #fff9ed;
+  background: #07090c;
+  --gold: #dfbd7d;
+  --line: rgba(220, 205, 175, 0.18);
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: #07090c;
+  color: #fff9ed;
+  overflow-x: hidden;
+}
+button,
+a {
+  color: inherit;
+}
+a {
+  text-decoration: none;
+}
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #040506;
+  display: grid;
+  place-items: center;
+  transition:
+    opacity 0.8s,
+    visibility 0.8s;
+}
+.loader span {
+  font: 300 20px/1 "Cormorant Garamond";
+  letter-spacing: 0.45em;
+}
+.loader i {
+  position: absolute;
+  width: 120px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  animation: load 0.6s 0.1s forwards;
+}
+.loaded .loader {
+  opacity: 0;
+  visibility: hidden;
+}
+@keyframes load {
+  to {
+    transform: scaleX(1);
+  }
+}
+header {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  padding: 0 4vw;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.logo {
+  font: 400 22px "Cormorant Garamond";
+  letter-spacing: 0.28em;
+}
+.logo small {
+  display: block;
+  font: 7px "Space Mono";
+  letter-spacing: 0.24em;
+  margin-top: 4px;
+  color: #a8a39a;
+}
+nav {
+  margin: auto;
+  display: flex;
+  gap: 42px;
+}
+nav a,
+.lang {
+  font: 10px "Noto Serif JP";
+  letter-spacing: 0.12em;
+  opacity: 0.72;
+  transition: 0.3s;
+}
+nav a:hover {
+  opacity: 1;
+}
+.lang,
+.menu {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.menu {
+  display: none;
+}
+.hero {
+  height: 72svh;
+  min-height: 650px;
+  position: relative;
+  overflow: hidden;
+}
+.scene {
+  position: absolute;
+  inset: 0 -5vw 0 7vw;
+  background:
+    radial-gradient(
+      ellipse at 82% 44%,
+      rgba(57, 89, 118, 0.13),
+      transparent 33%
+    ),
+    radial-gradient(
+      ellipse at 60% 52%,
+      rgba(170, 113, 44, 0.1),
+      transparent 37%
+    );
+}
+.scene canvas {
+  filter: brightness(1.08) contrast(1.08) saturate(1.08);
+}
+.scene:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(4, 5, 6, 0.92), transparent 46%),
+    linear-gradient(0deg, rgba(4, 5, 6, 0.6), transparent 30%);
+}
+.heroCopy {
+  position: absolute;
+  z-index: 5;
+  left: 6vw;
+  top: 24%;
+  width: 43vw;
+}
+.hero h1 {
+  font: 300 clamp(54px, 4.7vw, 78px)/1.24 "Noto Serif JP";
+  letter-spacing: 0.04em;
+  margin: 0 0 28px;
+  text-shadow: 0 2px 35px #000;
+}
+.heroCopy > p {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: #bcb6aa;
+}
+.circleCta {
+  width: 142px;
+  height: 142px;
+  border: 1px solid rgba(205, 165, 96, 0.7);
+  border-radius: 50%;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  transition: 0.45s;
+  background: rgba(4, 5, 6, 0.4);
+}
+.circleCta:hover {
+  background: var(--gold);
+  color: #080808;
+  transform: scale(1.06);
+}
+.circleCta svg {
+  width: 15px;
+}
+.starLabels button {
+  position: absolute;
+  z-index: 8;
+  left: calc(68% + var(--x) * 4.2%);
+  top: calc(48% - var(--y) * 8%);
+  background: none;
+  border: 0;
+  font: 11px "Noto Serif JP";
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 0.55;
+  transition: 0.3s;
+}
+.starLabels b {
+  font: 8px "Space Mono";
+  color: var(--gold);
+  margin-right: 8px;
+}
+.starLabels button.active {
+  opacity: 1;
+  color: #fff;
+}
+.scroll {
+  position: absolute;
+  z-index: 5;
+  right: 4vw;
+  bottom: 34px;
+  font: 8px "Space Mono";
+  letter-spacing: 0.2em;
+  color: #aaa;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.scroll i {
+  width: 52px;
+  height: 1px;
+  background: var(--gold);
+}
+.sectionIndex {
+  font: 9px "Space Mono";
+  letter-spacing: 0.22em;
+  color: #a79d8d;
+}
+.service {
+  min-height: 82vh;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 8vw 6vw;
+  position: relative;
+}
+.serviceNum {
+  font: 300 clamp(160px, 28vw, 430px)/0.8 "Cormorant Garamond";
+  color: rgba(210, 200, 181, 0.07);
+  position: absolute;
+  left: 5vw;
+  bottom: 0;
+}
+.serviceCopy {
+  grid-column: 2;
+  align-self: center;
+  z-index: 1;
+}
+.serviceCopy h2 {
+  font: 300 clamp(58px, 7vw, 120px)/1 "Noto Serif JP";
+  margin: 0 0 30px;
+}
+.serviceCopy p {
+  color: #aaa;
+  letter-spacing: 0.15em;
+}
+.serviceNav {
+  margin-top: 60px;
+  display: flex;
+  gap: 24px;
+}
+.serviceNav button {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #444;
+  padding: 10px 4px;
+  font: 10px "Space Mono";
+  cursor: pointer;
+  opacity: 0.45;
+}
+.serviceNav button.active {
+  opacity: 1;
+  border-color: var(--gold);
+}
+.works {
+  padding: 8vw 6vw;
+  min-height: 120vh;
+  border-top: 1px solid var(--line);
+}
+.works h2,
+.process h2,
+footer h2 {
+  font: 300 clamp(64px, 9vw, 150px)/0.95 "Noto Serif JP";
+  white-space: pre-line;
+  margin: 7vw 0;
+}
+.workVisual {
+  height: 62vh;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, #17130c 0, #050606 55%);
+}
+.planet {
+  width: min(36vw, 490px);
+  aspect-ratio: 1;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  box-shadow:
+    0 0 80px #c9a45f44,
+    inset -80px -20px 120px #000;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #f6e4b3,
+    #aa783c 27%,
+    #1b140b 62%,
+    #050505 72%
+  );
+  position: relative;
+}
+.planet i {
+  position: absolute;
+  inset: 45%;
+  border: 1px solid #d2b170;
+  border-radius: 50%;
+  transform: scale(2.8, 1) rotate(20deg);
+  box-shadow: 0 0 20px #c7a86b;
+}
+.workVisual span {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  font: 8px/2 "Space Mono";
+  letter-spacing: 0.18em;
+}
+.workFoot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9vw;
+  padding-top: 40px;
+}
+.workFoot p {
+  max-width: 480px;
+  color: #aaa;
+  line-height: 2;
+}
+.workFoot a,
+footer > a {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  border-bottom: 1px solid var(--gold);
+  padding: 12px 0;
+  font-size: 12px;
+}
+.process {
+  padding: 9vw 6vw;
+  border-top: 1px solid var(--line);
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+.steps > div {
+  padding: 38px 3vw 80px 0;
+  border-right: 1px solid var(--line);
+}
+.steps b {
+  font: 9px "Space Mono";
+  color: var(--gold);
+}
+.steps span {
+  display: block;
+  font: 28px "Cormorant Garamond";
+  letter-spacing: 0.1em;
+  margin: 55px 0 22px;
+}
+.steps p {
+  font-size: 12px;
+  color: #888;
+}
+footer {
+  min-height: 100vh;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+footer .sun {
+  width: 40vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: absolute;
+  top: -30vw;
+  background: radial-gradient(circle, #ffe6ad, #9d6b2e 45%, transparent 70%);
+  filter: blur(2px);
+  box-shadow: 0 0 140px #b77932;
+  opacity: 0.75;
+}
+footer h2 {
+  z-index: 1;
+  margin: 0 0 35px;
+}
+footer > p {
+  font-size: 12px;
+  color: #999;
+  max-width: 460px;
+  line-height: 2;
+}
+footer > a {
+  margin-top: 45px;
+}
+.footerLine {
+  position: absolute;
+  bottom: 30px;
+  left: 4vw;
+  right: 4vw;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  font: 8px "Space Mono";
+  letter-spacing: 0.15em;
+  color: #777;
+}
+.mobileNav {
+  display: none;
+}
+@media (max-width: 800px) {
+  header {
+    height: 72px;
+    padding: 0 20px;
+  }
+  .logo {
+    font-size: 18px;
+  }
+  nav,
+  .lang {
+    display: none;
+  }
+  .menu {
+    display: block;
+    margin-left: auto;
+  }
+  .mobileNav {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    background: #060708;
+    padding: 120px 30px;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 30px;
+  }
+  .hero {
+    height: 100svh;
+    min-height: 720px;
+  }
+  .heroCopy {
+    left: 24px;
+    top: 20%;
+    width: 90vw;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 13vw, 64px);
+  }
+  .heroCopy > p {
+    font-size: 11px;
+  }
+  .circleCta {
+    width: 112px;
+    height: 112px;
+    margin-top: 38px;
+  }
+  .scene {
+    left: -45%;
+    right: -55%;
+    top: 12%;
+  }
+  .scene:after {
+    background:
+      linear-gradient(0deg, #040506 0, transparent 45%),
+      linear-gradient(90deg, rgba(4, 5, 6, 0.85), transparent);
+  }
+  .starLabels {
+    display: none;
+  }
+  .referencePreview {
+    height: auto;
+    min-height: 330px;
+    grid-template-columns: 1fr;
+  }
+  .referencePreview > div {
+    padding: 28px 22px;
+  }
+  .previewTitle strong {
+    font-size: 68px;
+    margin-top: 20px;
+  }
+  .previewSelected { border-top: 1px solid var(--line); }
+  .previewSelected strong {
+    font-size: 24px;
+  }
+  .previewSelected small {
+    font-size: 8px;
+  }
+  .previewOrbit {
+    display: none;
+  }
+  .service {
+    grid-template-columns: 1fr;
+    min-height: 70vh;
+    padding: 90px 24px;
+  }
+  .serviceCopy {
+    grid-column: 1;
+    align-self: center;
+  }
+  .serviceCopy h2 {
+    font-size: 54px;
+  }
+  .serviceNum {
+    font-size: 220px;
+  }
+  .works,
+  .process {
+    padding: 90px 24px;
+  }
+  .works h2,
+  .process h2,
+  footer h2 {
+    font-size: 15vw;
+    margin: 80px 0;
+  }
+  .workVisual {
+    height: 50vh;
+  }
+  .planet {
+    width: 72vw;
+  }
+  .workFoot {
+    display: block;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+  }
+  .steps > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0;
+  }
+  .steps span {
+    margin: 28px 0 10px;
+  }
+  .footerLine span:nth-child(2) {
+    display: none;
+  }
+  footer {
+    padding: 0 24px;
+  }
+  .sun {
+    width: 80vw !important;
+    top: -40vw !important;
+  }
+  .sectionIndex {
+    font-size: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Reference-faithful selected work rail */
+.referencePreview {
+  height: 28svh;
+  min-height: 255px;
+  display: grid;
+  grid-template-columns: 41% 25% 34%;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  background: #050608;
+}
+.referencePreview > div {
+  position: relative;
+  padding: 32px 3vw;
+  border-right: 1px solid var(--line);
+}
+.referencePreview span {
+  font: 8px "Space Mono";
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+.previewTitle strong {
+  display: block;
+  margin-top: 18px;
+  font: 300 clamp(88px, 10vw, 170px)/0.74 "Cormorant Garamond";
+  color: rgba(232, 225, 210, 0.63);
+  letter-spacing: -0.04em;
+}
+.previewSelected strong {
+  display: block;
+  margin: 16px 0 10px;
+  font: 300 clamp(28px, 3vw, 48px)/1 "Noto Serif JP";
+  color: #e6bf78;
+}
+.previewSelected small {
+  display: block;
+  max-width: 280px;
+  color: #999187;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+.previewOrbit {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(178, 121, 49, 0.12),
+    transparent 65%
+  );
+}
+.previewOrbit:before {
+  content: "";
+  position: absolute;
+  width: 34%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(223, 189, 125, 0.75);
+  border-radius: 50%;
+  left: 38%;
+  top: 26%;
+  box-shadow: 0 0 30px rgba(220, 166, 80, 0.28);
+}
+.previewOrbit i {
+  position: absolute;
+  left: 10%;
+  top: 35%;
+  width: 80%;
+  height: 30%;
+  border: 1px solid rgba(223, 189, 125, 0.35);
+  border-radius: 50%;
+  transform: rotate(-13deg);
+}
+.previewOrbit i:nth-child(2) {
+  transform: rotate(12deg);
+}
+.previewOrbit i:nth-child(3) {
+  transform: rotate(-28deg);
+}
+
+/* Interactive galaxy controls */
+.scene {
+  cursor: grab;
+  touch-action: none;
+}
+.scene:active {
+  cursor: grabbing;
+}
+.star-hover .scene {
+  cursor: pointer;
+}
+.starDock {
+  position: absolute;
+  z-index: 9;
+  right: 4vw;
+  bottom: 84px;
+  width: 255px;
+  padding: 18px 48px 18px 18px;
+  border-left: 1px solid var(--gold);
+  background: rgba(4, 5, 6, 0.7);
+  backdrop-filter: blur(8px);
+  transition: 0.4s;
+}
+.starDock span {
+  font: 8px "Space Mono";
+  color: var(--gold);
+  letter-spacing: 0.14em;
+}
+.starDock strong {
+  display: block;
+  font: 300 18px "Noto Serif JP";
+  margin: 10px 0 5px;
+}
+.starDock p {
+  font-size: 9px;
+  color: #aaa;
+  margin: 0;
+  letter-spacing: 0.08em;
+}
+.starDock button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.starDock button:hover {
+  background: var(--gold);
+  color: #050505;
+}
+.starDock svg {
+  width: 13px;
+}
+.gesture {
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 34px;
+  font: 7px "Space Mono";
+  letter-spacing: 0.2em;
+  color: #777;
+  white-space: nowrap;
+}
+@media (min-width: 801px) {
+  .starDock,
+  .gesture {
+    display: none;
+  }
+}
+.serviceCopy {
+  animation: serviceReveal 0.55s ease both;
+}
+@keyframes serviceReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 1100px) and (min-width: 801px) {
+  nav {
+    gap: 24px;
+  }
+  .heroCopy {
+    width: 50vw;
+  }
+  .hero h1 {
+    font-size: clamp(54px, 7vw, 78px);
+  }
+  .starLabels button {
+    font-size: 9px;
+  }
+  .starDock {
+    width: 220px;
+  }
+  .works h2,
+  .process h2,
+  footer h2 {
+    font-size: 10vw;
+  }
+}
+@media (max-width: 800px) {
+  .scene {
+    bottom: 4%;
+  }
+  .starDock {
+    left: 24px;
+    right: 24px;
+    bottom: 70px;
+    width: auto;
+    padding: 13px 48px 13px 15px;
+    background: rgba(4, 5, 6, 0.82);
+  }
+  .starDock strong {
+    font-size: 15px;
+    margin: 5px 0;
+  }
+  .gesture {
+    bottom: 43px;
+    width: 100%;
+    text-align: center;
+    font-size: 6px;
+  }
+  .scroll {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .hero {
+    min-height: 660px;
+  }
+  .heroCopy {
+    top: 18%;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 12.2vw, 53px);
+    line-height: 1.3;
+  }
+  .heroCopy > p {
+    max-width: 270px;
+    line-height: 1.8;
+  }
+  .circleCta {
+    width: 102px;
+    height: 102px;
+    margin-top: 24px;
+  }
+  .service {
+    padding-top: 72px;
+  }
+  .serviceCopy h2 {
+    font-size: 48px;
+  }
+  .works h2,
+  .process h2,
+  footer h2 {
+    font-size: 14vw;
+  }
+  .footerLine {
+    font-size: 6px;
+  }
+}
+@media (max-height: 720px) and (max-width: 800px) {
+  .heroCopy {
+    top: 16%;
+  }
+  .circleCta {
+    width: 88px;
+    height: 88px;
+    margin-top: 18px;
+  }
+  .starDock {
+    bottom: 32px;
+  }
+  .gesture {
+    display: none;
+  }
+}
+.starLabels {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+.starLabels button {
+  pointer-events: auto;
+}
